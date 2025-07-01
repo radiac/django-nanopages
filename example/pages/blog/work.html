@@ -1,0 +1,11 @@
+---
+loop_length: 123456789012345
+---
+{% extends "base.html" %}
+
+{% block content %}
+
+  {# Iterate over the string defined in the context frontmatter for a simple range #}
+  <p>{% for i in loop_length %}All work and no play makes Jack a dull boy. {% endfor %}</p>
+
+{% endblock %}

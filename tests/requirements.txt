@@ -1,0 +1,17 @@
+##########################
+# Developer requirements #
+#########################
+
+# Core requirements
+-r ../requirements.txt
+-r ../example/requirements.txt
+
+# Example project
+nanodjango
+django-distill
+django-style
+
+# Testing
+pytest
+pytest-cov
+pytest-django

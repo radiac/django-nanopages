@@ -1,0 +1,22 @@
+*.pyc
+*.egg-info
+*.log
+__pycache__
+.venv/
+
+# Docs
+docs/_*
+build
+dist
+
+# Testing
+.tox
+.coverage*
+htmlcov
+.*_cache
+.vagrant
+Vagrantfile
+db.sqlite3
+
+# OS-specific
+.DS_Store
