@@ -1,5 +1,10 @@
 # Django Nanopages
 
+[![PyPI](https://img.shields.io/pypi/v/django-nanopages.svg)](https://pypi.org/project/django-nanopages/)
+[![Documentation](https://readthedocs.org/projects/django-nanopages/badge/?version=latest)](https://django-nanopages.readthedocs.io/en/latest/)
+[![Tests](https://github.com/radiac/django-nanopages/actions/workflows/ci.yml/badge.svg)](https://github.com/radiac/django-nanopages/actions/workflows/ci.yml)
+[![Coverage](https://codecov.io/gh/radiac/django-nanopages/branch/main/graph/badge.svg?token=BCNM45T6GI)](https://codecov.io/gh/radiac/django-nanopages)
+
 Generate Django pages from Markdown, HTML, and Django template files.
 
 Integrates well with:
