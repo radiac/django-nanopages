@@ -154,5 +154,5 @@ Lastly we can use the ``django-distill`` integration to generate a static site:
 
     nanodjango manage website.py distill-local static_site/
 
-See [django-distill docs](https://django-distill.com/) for more configuration and
+See `django-distill docs <https://django-distill.com>`_ for more configuration and
 deployment options.

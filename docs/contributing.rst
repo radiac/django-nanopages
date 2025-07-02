@@ -16,8 +16,8 @@ using your local copy of django-style:
 .. code-block:: bash
 
     git clone https://github.com/radiac/django-nanopages.git
-    cd django-nanopages
-    uvx nanodjango run examples/website.py
+    cd django-nanopages/example
+    uv run example/website.py
 
 
 Testing

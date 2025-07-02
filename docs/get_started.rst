@@ -28,7 +28,7 @@ Using with nanodjango
 
        nanodjango manage myscript.py distill-local static_site/
 
-   (see [django-distill docs](https://django-distill.com/) for more configuration and
+   (see `django-distill docs <https://django-distill.com>`_ for more configuration and
    deployment options)
 
 
@@ -71,5 +71,5 @@ Using with full Django
 
        ./manage.py distill-local static_site/
 
-   (see [django-distill docs](https://django-distill.com/) for more configuration and
+   (see `django-distill docs <https://django-distill.com>`_ for more configuration and
    deployment options)

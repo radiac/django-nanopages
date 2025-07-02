@@ -9,9 +9,9 @@ Generate Django pages from Markdown, HTML, and Django template files.
 
 Integrates well with:
 
-- nanodjango, to build a simple site with a single Python script
+- [nanodjango](https://github.com/radiac/nanodjango), to build a simple site with a single Python script
 - [django-distill](https://django-distill.com/), to generate a static site
-- django-style, for clean base templates
+- [django-style](https://github.com/radiac/django-style), for clean base templates
 
 ## Creating pages
 
@@ -34,6 +34,16 @@ Source pages can also provide context for your Django templates - see
 [context documentation]()
 
 ## Quickstart
+
+### Try the example
+
+Try out [the example site]() using nanodjango:
+
+```
+git clone https://github.com/radiac/django-nanopages.git
+cd django-nanopages/example
+uv run example/website.py
+```
 
 ### Using with nanodjango
 
