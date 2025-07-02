@@ -31,13 +31,13 @@ Files called `index` are special - they are the default content for their path, 
 - `section/page.md` will be served at `/section/page/`
 
 Source pages can also provide context for your Django templates - see
-[context documentation]()
+[context documentation](https://django-nanopages.readthedocs.io/en/latest/contexts/)
 
 ## Quickstart
 
 ### Try the example
 
-Try out [the example site]() using nanodjango:
+Try out [the example site](https://github.com/radiac/django-nanopages/tree/main/example) using nanodjango:
 
 ```
 git clone https://github.com/radiac/django-nanopages.git
