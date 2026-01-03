@@ -10,6 +10,7 @@ Generate Django pages from Markdown, HTML, and Django template files.
 
     get_started
     tutorial
+    usage
     contexts
     contributing
     changelog

@@ -98,10 +98,16 @@ This will be served at the top level of this page section - so at ``/``.
 
       <p><a href="/about/">About</a></p>
       <p><a href="/blog/">Blog</a></p>
+
+      <p><a href="{% url "pages" "blog/cookies" %}">My blog post about Cookies</a></p>
     {% endblock %}
     ```
 
 This will extend the django-style base template, and override the ``content`` block.
+
+You can also see that we can use Django's ``{% url %}`` template tag to link to specific
+pages within a nanopages dir, by referencing the ``name`` the dir is registered with -
+see :ref:`links`.
 
 We've got a standard Django template here, except for the context frontmatter at the top
 - see :doc:`contexts`  for more details. This will set the page title variable in the
