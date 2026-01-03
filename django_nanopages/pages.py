@@ -12,12 +12,6 @@ except ImportError:
     trigger_reload_soon = None
 
 
-def _trigger_browser_reload():
-    """
-    Trigger a browser reload via django-browser-reload if available
-    """
-
-
 registry = []
 
 
