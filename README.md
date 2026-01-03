@@ -12,6 +12,7 @@ Integrates well with:
 - [nanodjango](https://github.com/radiac/nanodjango), to build a simple site with a single Python script
 - [django-distill](https://django-distill.com/), to generate a static site
 - [django-style](https://github.com/radiac/django-style), for clean base templates
+- [django-browser-reload](https://github.com/adamchainz/django-browser-reload/), for automatic browser reloading
 
 ## Creating pages
 
