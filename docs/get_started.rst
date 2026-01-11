@@ -5,6 +5,8 @@ Get started
 Using with nanodjango
 =====================
 
+See :doc:`howto` for a full nanodjango example.
+
 1. Install nanodjango along with its dependencies for static site generation, including
    django-nanopages and django-distill:
 
@@ -28,8 +30,7 @@ Using with nanodjango
 
        nanodjango manage myscript.py distill-local static_site/
 
-   (see `django-distill docs <https://django-distill.com>`_ for more configuration and
-   deployment options)
+   See :doc:`static` for more details about static site generation.
 
 
 Using with full Django
@@ -71,7 +72,7 @@ Using with full Django
 
        ./manage.py distill-local static_site/
 
-   (see :doc:`static` for more details about static site generation)
+   See :doc:`static` for more details about static site generation.
 
 
 Automatic browser reloading

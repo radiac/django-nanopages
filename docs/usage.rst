@@ -94,26 +94,26 @@ The ``Pages`` class takes up to three arguments:
 
 ``Pages(path, name, context)``
 
-``path``:
+``path``
   The path to the directory containing source pages. Can be either a string path or a
   ``Path`` object.
 
   Relative paths are relative to ``django.settings.BASE_DIR``.
 
-``name``:
+``name``
   Optional string name for this ``Pages`` instance. Used for registry and reverse URL
   lookups, so must be unique.
 
   Defaults to the dir name of ``path``, eg ``Pages("content/microsite")`` is the same as
   ``Pages("content/microsite", name="microsite")``.
 
-``context``:
+``context``
   Optional dict containing a common template context for all pages. Values can be
   overridden by :doc:`contexts` frontmatter.
 
 It has the following functions:
 
-``get_page(request_path:str) -> Page | None``:
+``get_page(request_path:str) -> Page | None``
   Return the ``Page`` object for a given requested path (under the pages root), or None
   if no suitable file exists.
 
@@ -127,26 +127,26 @@ The ``Page`` class
 The ``pages.get_page(request_path)`` returns a ``Page`` class instance. This has the
 following attributes and methods:
 
-``page.request_path``:
+``page.request_path``
   The path under the ``Pages`` root
 
-``page.src``:
+``page.src``
   The local file path
 
-``page.name``:
+``page.name``
   The name of the page - the final slug in the request path
 
-``page.title``:
+``page.title``
   The ``title`` of the page from the ``page.context`` if it is set, or the ``page.name``
   in title case.
 
-``page.pages``:
+``page.pages``
   The ``Pages`` class this is from
 
-``page.body``:
+``page.body``
   The raw content. Cached for the request by ``page.read()``.
 
-``page.context``:
+``page.context``
   The frontmatter context - see :doc:`contexts` for details.
 
   Cached for the request by ``page.read()``.
