@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from pathlib import Path
 
 from nanodjango import Django, hookimpl
@@ -19,6 +21,7 @@ def django_post_setup(app):
     """
     Add ``app.pages(..)`` method to nanodjango.Django
     """
+    from django_nanopages import Pages
 
     def pages(
         self,
@@ -28,16 +31,17 @@ def django_post_setup(app):
         re: bool = False,
         name: str | None = None,
         context: dict | None = None,
-    ):
+    ) -> Pages:
         """
         django-nanopages integration
         """
-        from django_nanopages import Pages
 
+        pages = Pages(path, name=name, context=context)
         self.route(
             pattern,
-            include=Pages(path, name=name, context=context),
+            include=pages,
             re=re,
         )
+        return pages
 
     Django.pages = pages

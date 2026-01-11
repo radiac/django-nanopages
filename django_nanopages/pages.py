@@ -4,7 +4,8 @@ from django.dispatch import receiver
 from django.urls import URLResolver, include, path, re_path
 from django.utils.autoreload import autoreload_started, file_changed, get_reloader
 
-from .views import Page
+from .page import Page
+from .views import PageView
 
 try:
     from django_browser_reload.views import trigger_reload_soon
@@ -12,7 +13,7 @@ except ImportError:
     trigger_reload_soon = None
 
 
-registry = []
+registry = {}
 
 
 class Pages(tuple):
@@ -24,6 +25,10 @@ class Pages(tuple):
 
     #: Template context
     context: dict | None
+
+    def __new__(cls, path: str | Path, name: str | None = None, *, context: dict | None = None):
+        # Create an empty tuple instance
+        return super().__new__(cls)
 
     def __init__(
         self,
@@ -61,13 +66,13 @@ class Pages(tuple):
         super().__init__()
 
         # Check name uniqueness
-        for pages in registry:
-            if pages.name == self.name:
-                raise ValueError(
-                    f"Pages name {self.name} for {self.path} also used for {pages.path}"
-                )
+        if self.name in registry:
+            existing = registry[self.name]
+            raise ValueError(
+                f"Pages name {self.name} for {self.path} also used for {existing.path}"
+            )
 
-        registry.append(self)
+        registry[self.name] = self
         self.autoreload()
 
     @property
@@ -90,12 +95,12 @@ class Pages(tuple):
                 [
                     distill_path(
                         "",
-                        view=Page.as_view(pages=self, extra_context=self.context),
+                        view=PageView.as_view(pages=self, extra_context=self.context),
                         name=self.name,
                     ),
                     distill_re_path(
                         r"^(.*)/$",
-                        Page.as_view(pages=self, extra_context=self.context),
+                        PageView.as_view(pages=self, extra_context=self.context),
                         name=self.name,
                         distill_func=self.get_request_paths,
                     ),
@@ -106,12 +111,12 @@ class Pages(tuple):
             [
                 path(
                     "",
-                    Page.as_view(pages=self, extra_context=self.context),
+                    PageView.as_view(pages=self, extra_context=self.context),
                     name=self.name,
                 ),
                 re_path(
                     r"^(.*)/$",
-                    Page.as_view(pages=self, extra_context=self.context),
+                    PageView.as_view(pages=self, extra_context=self.context),
                     name=self.name,
                 ),
             ]
@@ -143,6 +148,21 @@ class Pages(tuple):
 
         return paths
 
+    def get_page(self, request_path: str) -> Page | None:
+        """
+        Get a Page instance for the given request path.
+
+        Args:
+            request_path: The URL path being requested
+
+        Returns:
+            Page instance for the request path, or None if the page doesn't exist
+        """
+        page = Page(request_path=request_path, pages=self, extra_context=self.context)
+        if not page.exists:
+            return None
+        return page
+
     def __getitem__(self, index):
         return self.urls[index]
 
@@ -172,7 +192,7 @@ if trigger_reload_soon is not None:
         """
         Register all Pages directories with Django's autoreloader
         """
-        for pages in registry:
+        for pages in registry.values():
             sender.watch_dir(pages.path, "**/*")
 
     @receiver(file_changed, dispatch_uid="nanopages_file_changed")
@@ -180,7 +200,7 @@ if trigger_reload_soon is not None:
         """
         Handle file changes in registered directories
         """
-        for pages in registry:
+        for pages in registry.values():
             if file_path.is_relative_to(pages.path):
                 # File is in one of our directories, tell django-browser-reload
                 trigger_reload_soon()

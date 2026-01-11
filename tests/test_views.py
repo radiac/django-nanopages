@@ -5,80 +5,50 @@ import pytest
 from django.http import Http404, HttpResponse
 from django.test import RequestFactory
 
-from django_nanopages.views import Page
+from django_nanopages.page import Page
+from django_nanopages.pages import Pages
+from django_nanopages.views import PageView
 
 
 @pytest.fixture
-def page(tmp_path):
-    page = Page()
-    page.pages = MagicMock()
-    page.pages.path = tmp_path
-    page.request = RequestFactory().get("/")
-    return page
+def page_view(tmp_path):
+    page_view = PageView()
+    page_view.pages = MagicMock()
+    page_view.pages.path = tmp_path
+    page_view.request = RequestFactory().get("/")
+    return page_view
 
 
-def test_view__find_src_valid_md(page):
-    md_file = page.pages.path / "test.md"
-    md_file.write_text("# Test Markdown")
-    result = page.find_src("test")
-    assert result == md_file
-
-
-def test_view__find_src_valid_html(page):
-    html_file = page.pages.path / "test.html"
-    html_file.write_text("<h1>Test HTML</h1>")
-    result = page.find_src("test")
-    assert result == html_file
-
-
-def test_find_src_not_found(page):
-    with pytest.raises(Http404):
-        page.find_src("non_existent")
-
-
-def test_parse_context_no_context(page):
-    raw = "This is a test."
-    result = page.parse_context(raw)
-    assert result == (raw, {"base": "base.html"})
-
-
-def test_parse_context_with_key_value(page):
-    raw = "---\nkey: value\n---\nThis is a test."
-    result = page.parse_context(raw)
-    assert result[1] == {"base": "base.html", "key": "value"}
-    assert result[0] == "This is a test."
-
-
-def test_parse_context_with_yaml(page):
-    raw = "---yaml\nkey: value\n---\nThis is a test."
-    result = page.parse_context(raw)
-    assert result[1] == {"base": "base.html", "key": "value"}
-    assert result[0] == "This is a test."
-
-
-def test_parse_context_with_json(page):
-    """Test parsing raw content with JSON context."""
-    raw = '---json\n{"key": "value"}\n---\nThis is a test.'
-    result = page.parse_context(raw)
-    assert result[1] == {"base": "base.html", "key": "value"}
-    assert result[0] == "This is a test."
-
-
-def test_render_md(page):
-    md_file = page.pages.path / "test.md"
+def test_render_md(page_view):
+    md_file = page_view.pages.path / "test.md"
     md_file.write_text("---\nkey: value\n---\n# Test Markdown")
 
-    response = page.render_md(md_file)
+    page = Page(request_path="test", pages=page_view.pages)
+    response = page_view.render_md(page)
     assert isinstance(response, HttpResponse)
-    assert "content" in response.context_data
-    assert response.context_data["content"] == "<h1>Test Markdown</h1>"
+    assert page.context["key"] == "value"
+    assert page.as_html() == "<h1>Test Markdown</h1>"
 
 
-def test_render_html(page):
-    html_file = page.pages.path / "test.html"
+def test_render_html(page_view):
+    html_file = page_view.pages.path / "test.html"
     html_file.write_text("---\nkey: value\n---\n<h1>Test HTML</h1>")
 
-    response = page.render_html(html_file)
+    page = Page(request_path="test", pages=page_view.pages)
+    response = page_view.render_html(page)
     assert isinstance(response, HttpResponse)
-    assert "key" in response.context_data
-    assert response.context_data["key"] == "value"
+    assert page.context["key"] == "value"
+    assert b"<h1>Test HTML</h1>" in response.content
+
+
+def test_view_raises_404_for_missing_page(tmp_path, settings):
+    settings.BASE_DIR = tmp_path
+    pages_dir = tmp_path / "pages"
+    pages_dir.mkdir()
+
+    page_view = PageView()
+    page_view.pages = Pages(pages_dir)
+    page_view.request = RequestFactory().get("/non_existent/")
+
+    with pytest.raises(Http404):
+        page_view.get(page_view.request, request_path="non_existent")

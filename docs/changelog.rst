@@ -2,6 +2,28 @@
 Changelog
 =========
 
+0.3.0 - 2026-01-11
+------------------
+
+Features:
+
+* Add ``Pages.registry`` dict to retrieve a ``Pages`` instance
+* Add ``Pages.get_page(request_path)`` to get a ``Page`` object
+* Add ``Page`` object, to work with page data in templates or outside the page view
+* Template context now has ``page``, a reference to the current ``Page`` object
+
+Changes:
+
+* ``Pages`` names must be unique
+* nanodjango ``app.pages(...)`` call now returns a ``Pages`` object
+* Renamed view from ``views.Page`` to ``views.PageView``
+
+
+Docs:
+
+* Add :doc:`howto` and :doc:`static` documentation
+
+
 0.2.0 - 2026-01-03
 ------------------
 

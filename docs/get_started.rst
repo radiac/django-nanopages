@@ -71,8 +71,7 @@ Using with full Django
 
        ./manage.py distill-local static_site/
 
-   (see `django-distill docs <https://django-distill.com>`_ for more configuration and
-   deployment options)
+   (see :doc:`static` for more details about static site generation)
 
 
 Automatic browser reloading

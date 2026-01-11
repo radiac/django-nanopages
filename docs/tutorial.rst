@@ -160,5 +160,7 @@ Lastly we can use the ``django-distill`` integration to generate a static site:
 
     nanodjango manage website.py distill-local static_site/
 
-See `django-distill docs <https://django-distill.com>`_ for more configuration and
-deployment options.
+This will generate a complete static site in the ``static_site/`` directory that you can
+deploy to any static hosting service.
+
+See :doc:`static` for more details about static site generation.
