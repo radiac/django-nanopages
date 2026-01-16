@@ -14,6 +14,8 @@ Integrates well with:
 - [django-style](https://github.com/radiac/django-style), for clean base templates
 - [django-browser-reload](https://github.com/adamchainz/django-browser-reload/), for automatic browser reloading
 
+Read the [documentation](https://django-nanopages.readthedocs.io/en/latest/) or find the project on [PyPI](https://pypi.org/project/django-nanopages/).
+
 ## Creating pages
 
 Nanopages supports
