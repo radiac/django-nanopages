@@ -74,8 +74,8 @@ class Page:
 
         # Look for file
         search = [
-            path_stem.with_suffix(".html"),
-            path_stem.with_suffix(".md"),
+            Path(f"{path_stem}.html"),
+            Path(f"{path_stem}.md"),
             path_stem / "index.html",
             path_stem / "index.md",
         ]

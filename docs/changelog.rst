@@ -2,6 +2,14 @@
 Changelog
 =========
 
+0.3.1 - 2026-01-16
+------------------
+
+Bugfix:
+
+* URLs with suffix resolved correctly
+
+
 0.3.0 - 2026-01-11
 ------------------
 
