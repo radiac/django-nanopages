@@ -48,7 +48,7 @@ class PageView(View):
         context["page"] = page
         context["content"] = page.as_html()
 
-        return render(self.request, "django_nanopages/page.html", context=context)
+        return render(self.request, context["base"], context=context)
 
     def render_html(self, page: Page) -> HttpResponse:
         # The template isn't in a template dir, so need to read it manually anyway

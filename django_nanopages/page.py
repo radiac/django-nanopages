@@ -113,7 +113,7 @@ class Page:
 
         # Parse frontmatter
         context = {
-            "base": "base.html",
+            "base": "django_nanopages/page.html",
         }
         context.update(self.extra_context)
 

@@ -2,6 +2,14 @@
 Changelog
 =========
 
+0.3.2 - 2026-04-04
+------------------
+
+Bugfix:
+
+* Fix ``base`` template override in markdown frontmatter
+
+
 0.3.1 - 2026-01-16
 ------------------
 
