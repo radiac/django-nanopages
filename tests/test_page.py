@@ -93,7 +93,7 @@ def test_read_no_frontmatter(pages_mock):
     body, context = page.read()
 
     assert body == "This is a test."
-    assert context == {"base": "base.html"}
+    assert context == {"base": "django_nanopages/page.html"}
 
 
 def test_read_with_key_value_frontmatter(pages_mock):
@@ -104,7 +104,7 @@ def test_read_with_key_value_frontmatter(pages_mock):
     body, context = page.read()
 
     assert body == "This is a test."
-    assert context == {"base": "base.html", "key": "value"}
+    assert context == {"base": "django_nanopages/page.html", "key": "value"}
 
 
 def test_read_with_extra_context(pages_mock):
@@ -115,7 +115,7 @@ def test_read_with_extra_context(pages_mock):
     body, context = page.read()
 
     assert body == "This is a test."
-    assert context == {"base": "base.html", "extra": "context", "key": "value"}
+    assert context == {"base": "django_nanopages/page.html", "extra": "context", "key": "value"}
 
 
 def test_read_with_yaml_frontmatter(pages_mock):
@@ -126,7 +126,7 @@ def test_read_with_yaml_frontmatter(pages_mock):
     body, context = page.read()
 
     assert body == "This is a test."
-    assert context == {"base": "base.html", "key": "value"}
+    assert context == {"base": "django_nanopages/page.html", "key": "value"}
 
 
 def test_read_with_json_frontmatter(pages_mock):
@@ -137,7 +137,7 @@ def test_read_with_json_frontmatter(pages_mock):
     body, context = page.read()
 
     assert body == "This is a test."
-    assert context == {"base": "base.html", "key": "value"}
+    assert context == {"base": "django_nanopages/page.html", "key": "value"}
 
 
 def test_as_html_md(pages_mock):
@@ -149,7 +149,7 @@ def test_as_html_md(pages_mock):
 
     assert content == "<h1>Test Markdown</h1>"
     assert page.context["key"] == "value"
-    assert page.context["base"] == "base.html"
+    assert page.context["base"] == "django_nanopages/page.html"
 
 
 def test_as_html_html(pages_mock):
@@ -161,7 +161,7 @@ def test_as_html_html(pages_mock):
 
     assert content == "<h1>Test HTML</h1>"
     assert page.context["key"] == "value"
-    assert page.context["base"] == "base.html"
+    assert page.context["base"] == "django_nanopages/page.html"
 
 
 def test_as_html_with_extra_context(pages_mock):
@@ -173,7 +173,7 @@ def test_as_html_with_extra_context(pages_mock):
 
     assert content == "<h1>Test</h1>"
     assert page.context["extra"] == "value"
-    assert page.context["base"] == "base.html"
+    assert page.context["base"] == "django_nanopages/page.html"
 
 
 def test_read_caching(pages_mock):
