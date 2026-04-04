@@ -9,12 +9,12 @@ Generate Django pages from Markdown, HTML, and Django template files.
 
 Integrates well with:
 
-- [nanodjango](https://github.com/radiac/nanodjango), to build a simple site with a single Python script
-- [django-distill](https://django-distill.com/), to generate a static site
-- [django-style](https://github.com/radiac/django-style), for clean base templates
-- [django-browser-reload](https://github.com/adamchainz/django-browser-reload/), for automatic browser reloading
+- [nanodjango](https://github.com/radiac/nanodjango) - build a site in just [5 lines of Python](https://django-nanopages.readthedocs.io/en/latest/howto/#minimal-nanodjango-site)
+- [django-distill](https://django-distill.com/) - turn it into a static site
+- [django-style](https://github.com/radiac/django-style) - base templates with clean styles
+- [django-browser-reload](https://github.com/adamchainz/django-browser-reload/) - automatic browser reloading when writing your content
 
-Read the [documentation](https://django-nanopages.readthedocs.io/en/latest/) or find the project on [PyPI](https://pypi.org/project/django-nanopages/).
+Read the [full documentation](https://django-nanopages.readthedocs.io/en/latest/) or find the project on [PyPI](https://pypi.org/project/django-nanopages/).
 
 ## Creating pages
 
