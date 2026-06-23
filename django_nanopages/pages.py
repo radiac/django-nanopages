@@ -95,7 +95,7 @@ class Pages(tuple):
                 [
                     distill_path(
                         "",
-                        view=PageView.as_view(pages=self, extra_context=self.context),
+                        PageView.as_view(pages=self, extra_context=self.context),
                         name=self.name,
                     ),
                     distill_re_path(
