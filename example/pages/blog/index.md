@@ -1,5 +1,5 @@
 ---
-site_title: django-nanopages example blog
+title: django-nanopages example blog
 ---
 
 ## Blog
