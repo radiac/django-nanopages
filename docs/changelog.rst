@@ -2,6 +2,26 @@
 Changelog
 =========
 
+0.4.0 - 2026-09-13
+------------------
+
+Bugfix:
+
+* Update code to match docs - template override should be ``extends``, not ``base``
+
+Upgrading
+~~~~~~~~~
+
+The context now correctly uses ``extends`` for the base template override. If you've
+been using ``base``, the ``base`` value will be copied into ``extends`` so it still
+works, but you will get a deprecation warning.
+
+To fix this, change the key to ``extends``.
+
+This deprecation warning and the backwards compatibility with ``base`` will be removed
+in version 0.5.
+
+
 0.3.2 - 2026-04-04
 ------------------
 

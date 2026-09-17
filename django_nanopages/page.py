@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import warnings
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
@@ -106,6 +107,14 @@ class Page:
         if reload or not self._body or not self._context:
             self._body, self._context = self._read()
 
+            if "base" in self._context:
+                warnings.warn(
+                    "The `base` context key is deprecated, use `extends` instead",
+                    DeprecationWarning,
+                    stacklevel=2,
+                )
+                self._context["extends"] = self._context["base"]
+
         return self._body, self._context
 
     def _read(self) -> tuple[str, dict[str, Any]]:
@@ -113,7 +122,7 @@ class Page:
 
         # Parse frontmatter
         context = {
-            "base": "django_nanopages/page.html",
+            "extends": "django_nanopages/page.html",
         }
         context.update(self.extra_context)
 

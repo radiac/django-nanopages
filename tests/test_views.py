@@ -41,6 +41,28 @@ def test_render_html(page_view):
     assert b"<h1>Test HTML</h1>" in response.content
 
 
+def test_extends_frontmatter_sets_base_template(page_view, settings):
+    """
+    Docs say the ``extends`` frontmatter key selects the base template
+    (docs/contexts.rst), so a page setting it should render through that template
+    instead of the default ``django_nanopages/page.html``.
+    """
+    template_dir = page_view.pages.path / "templates"
+    template_dir.mkdir()
+    (template_dir / "correct-base.html").write_text(
+        "--correct-base--{{ content|safe }}"
+    )
+    settings.TEMPLATES = [{**settings.TEMPLATES[0], "DIRS": [template_dir]}]
+
+    md_file = page_view.pages.path / "test.md"
+    md_file.write_text("---\nextends: correct-base.html\n---\n# Test")
+
+    page = Page(request_path="test", pages=page_view.pages)
+    response = page_view.render_md(page)
+
+    assert b"--correct-base--" in response.content
+
+
 def test_view_raises_404_for_missing_page(tmp_path, settings):
     settings.BASE_DIR = tmp_path
     pages_dir = tmp_path / "pages"
