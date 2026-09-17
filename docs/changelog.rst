@@ -22,6 +22,12 @@ This deprecation warning and the backwards compatibility with ``base`` will be r
 in version 0.5.
 
 
+0.3.3 - 2026-06-25
+------------------
+
+* Fix ``django-distill`` integration
+
+
 0.3.2 - 2026-04-04
 ------------------
 
