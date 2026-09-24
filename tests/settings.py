@@ -6,6 +6,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_nanopages",
     "django_style",
+    "django_distill",
 ]
 
 MIDDLEWARE = [
