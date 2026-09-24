@@ -26,7 +26,9 @@ class Pages(tuple):
     #: Template context
     context: dict | None
 
-    def __new__(cls, path: str | Path, name: str | None = None, *, context: dict | None = None):
+    def __new__(
+        cls, path: str | Path, name: str | None = None, *, context: dict | None = None
+    ):
         # Create an empty tuple instance
         return super().__new__(cls)
 
@@ -80,32 +82,33 @@ class Pages(tuple):
         """
         Return the URL patterns for the pages
 
-        Supports django-distill if installed
+        Supports django-distill if installed.
         """
         # Import here due to potential load order conflicts with nanodjango
         try:
-            from django_distill import distill_path, distill_re_path
+            import django_distill
         except ImportError:
-            distill_path = None
-            distill_re_path = None
+            django_distill = None
 
         # Determine which path fns we're going to use
-        if distill_path and distill_re_path:
-            return include(
-                [
-                    distill_path(
-                        "",
-                        PageView.as_view(pages=self, extra_context=self.context),
-                        name=self.name,
-                    ),
-                    distill_re_path(
-                        r"^(.*)/$",
-                        PageView.as_view(pages=self, extra_context=self.context),
-                        name=self.name,
-                        distill_func=self.get_request_paths,
-                    ),
-                ],
+        if django_distill:
+            index_pattern = django_distill.distill_path(
+                "",
+                PageView.as_view(pages=self, extra_context=self.context),
+                name=self.name,
             )
+            catchall_pattern = django_distill.distill_re_path(
+                r"^(.*)/$",
+                PageView.as_view(pages=self, extra_context=self.context),
+                name=self.name,
+                distill_func=self.get_request_paths,
+            )
+
+            if int(django_distill.__version__.split(".")[0]) >= 4:
+                django_distill.add_distilled_url(index_pattern)
+                django_distill.add_distilled_url(catchall_pattern)
+
+            return include([index_pattern, catchall_pattern])
 
         return include(
             [
