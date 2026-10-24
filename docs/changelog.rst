@@ -2,12 +2,20 @@
 Changelog
 =========
 
-0.4.1 - TBC
+0.4.2 - TBC
 -----------
 
 Features:
 
 * Add example code to demo full static site generation
+
+
+0.4.1 - 2026-09-24
+------------------
+
+Bugfix:
+
+* Update django-distill integration to support version 4
 
 
 0.4.0 - 2026-09-13
