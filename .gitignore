@@ -17,6 +17,9 @@ htmlcov
 .vagrant
 Vagrantfile
 db.sqlite3
+example/static-collected
+example/output
+example/migrations
 
 # OS-specific
 .DS_Store

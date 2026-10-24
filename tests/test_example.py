@@ -46,19 +46,19 @@ def test_example__about(example):
     assert '<a href="/">Return to home</a>' in html
 
 
-def test_example__blog_index(example):
-    status, html = get(f"http://{TEST_BIND}/blog/")
+def test_example__articles_index(example):
+    status, html = get(f"http://{TEST_BIND}/articles/")
     assert status == 200
     assert "<h1>django-nanopages example blog</h1>" in html
 
 
-def test_example__blog_cookies(example):
-    status, html = get(f"http://{TEST_BIND}/blog/cookies/")
+def test_example__articles_cookies(example):
+    status, html = get(f"http://{TEST_BIND}/articles/cookies/")
     assert status == 200
     assert "<li>Allow them to cool on a wire rack.</li>" in html
 
 
-def test_example__blog_work(example):
-    status, html = get(f"http://{TEST_BIND}/blog/work/")
+def test_example__articles_work(example):
+    status, html = get(f"http://{TEST_BIND}/articles/work/")
     assert status == 200
     assert "<p>All work and no play makes Jack a dull boy. All work and no play" in html

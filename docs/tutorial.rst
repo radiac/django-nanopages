@@ -72,7 +72,7 @@ We're going to create some files - our project dir is going to look like this::
     pages/
       index.html
       about.md
-      blog/
+      articles/
         index.md
         cookies.md
         work.html
@@ -97,9 +97,9 @@ This will be served at the top level of this page section - so at ``/``.
       <p>Welcome to the example site.</p>
 
       <p><a href="/about/">About</a></p>
-      <p><a href="/blog/">Blog</a></p>
+      <p><a href="/articles/">Articles</a></p>
 
-      <p><a href="{% url "pages" "blog/cookies" %}">My blog post about Cookies</a></p>
+      <p><a href="{% url "pages" "articles/cookies" %}">My article about Cookies</a></p>
     {% endblock %}
     ```
 
@@ -158,9 +158,19 @@ Lastly we can use the ``django-distill`` integration to generate a static site:
 
 .. code-block:: bash
 
-    nanodjango manage website.py distill-local static_site/
+    nanodjango manage website.py distill generate static_site/
 
 This will generate a complete static site in the ``static_site/`` directory that you can
 deploy to any static hosting service.
 
 See :doc:`static` for more details about static site generation.
+
+
+Real world example
+==================
+
+For a fleshed-out working example, see the
+[github example project](https://github.com/radiac/django-nanopages/tree/main/example),
+and the accompanying
+[nanodjango.dev blog post](https://nanodjango.dev/blog/2026-10-static-site-builder/).
+

@@ -2,7 +2,8 @@
 Static site generation
 ======================
 
-Django Nanopages integrates with `django-distill <https://django-distill.com/>`_
+Django Nanopages integrates with
+`django-distill <https://github.com/meeb/django-distill/blob/master/README.md>`_
 to generate a fully static HTML site from your pages.
 
 This is perfect for blogs, documentation sites, or any content that doesn't need dynamic
@@ -30,7 +31,7 @@ If you're using nanodjango, generate your static site with ``nanodjango manage``
 
 .. code-block:: bash
 
-    nanodjango manage website.py distill-local output/
+    nanodjango manage website.py distill generate --output-directory=output/ --collectstatic
 
 See the :docs:howto: for a full example.
 
@@ -42,7 +43,7 @@ For a standard Django project:
 
 .. code-block:: bash
 
-    python manage.py distill-local output/
+    python manage.py distill generate --output-directory=output/ --collectstatic
 
 
 
@@ -50,21 +51,21 @@ Build options
 =============
 
 The ``distill-local`` command supports several useful options. See the
-`django-distill documentation <https://django-distill.com/>`_ for full details,
-but as a quick reference:
+`django-distill documentation <https://github.com/meeb/django-distill/blob/master/README.md>`_
+for full details, but as a quick reference:
 
 Collect static files automatically:
 
 .. code-block:: bash
 
-    python manage.py distill-local output/ --collectstatic
+    python manage.py distill generate --output-directory=output/ --collectstatic
 
 
 Force overwrite - skip confirmation prompts when overwriting existing files:
 
 .. code-block:: bash
 
-    python manage.py distill-local output/ --force
+    python manage.py distill generate --output-directory=output/ --collectstatic --force
 
 
 Deployment
@@ -82,7 +83,7 @@ Push your generated ``output/`` directory to a ``gh-pages`` branch:
 
 .. code-block:: bash
 
-    python manage.py distill-local output/
+    python manage.py distill generate --output-directory=output/ --collectstatic
     cd output/
     git init
     git add .
@@ -107,18 +108,21 @@ Then configure your deployment target in settings:
 
     # settings.py
     DISTILL_PUBLISH = {
-        'engine': 'django_distill.backends.amazon_s3',
-        'bucket': 'your-bucket-name',
-        'region': 'us-east-1',
-        'access_key_id': os.environ['AWS_ACCESS_KEY_ID'],
-        'secret_access_key': os.environ['AWS_SECRET_ACCESS_KEY'],
+      'default': {
+          'ENGINE': 'django_distill.backends.amazon_s3',
+          'PUBLIC_URL': 'http://.../',
+          'ACCESS_KEY_ID': os.environ['AWS_ACCESS_KEY_ID'],
+          'SECRET_ACCESS_KEY': os.environ['AWS_SECRET_ACCESS_KEY'],
+          'BUCKET': '...',
+          'region': 'us-east-1',
+      },
     }
 
 Then publish:
 
 .. code-block:: bash
 
-    python manage.py distill-publish
+    python manage.py distill publish --collectstatic
 
 This automatically syncs your static site to S3, removing old files and uploading new
 ones.

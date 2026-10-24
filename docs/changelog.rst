@@ -2,6 +2,14 @@
 Changelog
 =========
 
+0.4.1 - TBC
+-----------
+
+Features:
+
+* Add example code to demo full static site generation
+
+
 0.4.0 - 2026-09-13
 ------------------
 
