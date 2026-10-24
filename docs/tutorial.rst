@@ -170,7 +170,7 @@ Real world example
 ==================
 
 For a fleshed-out working example, see the
-[github example project](https://github.com/radiac/django-nanopages/tree/main/example),
+`github example project <https://github.com/radiac/django-nanopages/tree/main/example>`_,
 and the accompanying
-[nanodjango.dev blog post](https://nanodjango.dev/blog/2026-10-static-site-builder/).
+`nanodjango.dev blog post <https://nanodjango.dev/blog/2026-10-static-site-builder/>`_.
 

@@ -79,9 +79,6 @@ Automatic browser reloading
 ===========================
 
 django-nanopages integrates with
-[django-browser-reload](https://github.com/adamchainz/django-browser-reload) for
+`django-browser-reload <https://github.com/adamchainz/django-browser-reload>`_ for
 automatic browser reloading when you make changes to files within a page directory.
-
-Follow the installation instructions for
-[django-browser-reload](https://github.com/adamchainz/django-browser-reload), and
-your page directories will be automatically registered when it is available.
+Nanopages will automatically register itself with browser reload when it is available.
