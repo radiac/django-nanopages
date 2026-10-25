@@ -49,7 +49,7 @@ def test_example__about(example):
 def test_example__articles_index(example):
     status, html = get(f"http://{TEST_BIND}/articles/")
     assert status == 200
-    assert "<h1>django-nanopages example blog</h1>" in html
+    assert "<h1>django-nanopages example articles</h1>" in html
 
 
 def test_example__articles_cookies(example):
